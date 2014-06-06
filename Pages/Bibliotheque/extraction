@@ -1,0 +1,39 @@
+<?php 
+ include('../../connexion/connexion1.php');
+
+
+function Retour_XML($reponse, $status)
+ { 
+ print ("<root>\n");
+ print ("<status>$status</status>\n");
+ print ("<reponse><![CDATA[");
+ print ("$reponse");
+ print ("]]></reponse>\n");
+ print ("</root>\n");
+ die();
+ }
+
+ header('Content-Type: text/xml; charset=ISO-8859-1');
+ echo '<?xml version="1.0" encoding="ISO-8859-1" ?>';
+
+// Récupération
+ $region = utf8_decode($_POST['Region']);
+
+// Liste Province
+ $sql = "SELECT * FROM province WHERE Code_Province = $region ORDER BY Nom_Province";
+ $result = mysql_query($sql) or die('Erreur de selection '.mysql_error());
+
+// Reponse XML 
+ print ("<root>\n");
+ print ("<reponse><![CDATA[");
+ // CDATA de la LISTE
+ print ("<SELECT name='Province' size='1'>\n");
+ print ("<option value='0'>Province</option>\n");
+ while ($bres = mysql_fetch_object($result)) 
+ print ("<option value='$bres->Code_Province'>$bres->Nom_Province</option>\n"); 
+ print ("</SELECT>\n");
+ print ("]]></reponse>\n");
+ print ("<status>1</status>\n");
+ print ("</root>\n");
+ mysql_close();
+ ?> 
