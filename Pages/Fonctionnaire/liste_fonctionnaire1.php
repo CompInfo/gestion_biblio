@@ -245,7 +245,7 @@ echo '
 					   <td><?=$row['Nom_Bibli']?></td>
 						
                 <td>
-            
+             <a href="<?php echo "Information_detaillees.php?var1=".$row['Code_Fonct']."" ?>"><span class="glyphicon glyphicon-list-alt"/></a>
                     <a href="<?php echo "Modifier_un_fonctionnaire.php?var2=".$row['Code_Fonct']."" ?>"  data-toggle="modal" data-target="#largeModal" ><span class="glyphicon glyphicon-pencil"/></a>
                     <? echo '<a href="Supprimer_un_fonctionnaire.php?idee='.$row[0].'"><span class="glyphicon glyphicon-remove"/></a>'; ?>
 				</td>
