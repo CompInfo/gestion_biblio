@@ -7,6 +7,7 @@ echo '
 
 	<script src="../../js/jquery-1.10.2.js" type="text/javascript"></script>
 <script src="../../js/jquery.dataTables.js" type="text/javascript"></script>
+<script type="text/javascript" src="../../js/keyboard.js" charset="UTF-8"></script>
 	<style type="text/css">
 		@import "../../css/jquery.dataTables.css";
 	</style>
@@ -30,6 +31,7 @@ echo '
     <link href="../../css/css_Menu_index/style4.css" rel="stylesheet">
     <link href="../../css/css_accordion/Style.css" rel="stylesheet">
     <link href="../../css/css_accordion/demo1.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="../../css/keyboard.css">
 	
 	    <!-- Js Files  -->
 	<script type="text/javascript" src="../../js/modernizr.custom.29473.js"></script>
@@ -270,7 +272,7 @@ $(\'#openBtn\').click(function(){
 		
 		
 		</table>
-		</form>
+		
           <br>
           <br>
           <br>
@@ -280,8 +282,9 @@ $(\'#openBtn\').click(function(){
         </div>
         <div class="modal-footer">
          
-		 <input class="btn btn-primary " type ="submit" value="Ajouter" name="ajouter">
+		 <input class="btn btn-primary btn-lg" type ="submit" value="Ajouter" name="ajouter">
           <a href="#" class="btn btn-primary" data-dismiss="modal">Annuler</a>
+		  </form>
         </div>
       </div>
     </div>
