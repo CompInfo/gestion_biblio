@@ -34,7 +34,11 @@ echo '
 	    <!-- Js Files  -->
 	<script type="text/javascript" src="../../js/modernizr.custom.29473.js"></script>
     <script type="text/javascript" src="../../js/bootstrap.min.js"></script>
-
+<script type="text/javascript" src="js/keyboard.js" charset="UTF-8"></script>
+<script>
+$(\'#openBtn\').click(function(){
+	$(\'#myModal\').modal({show:true})
+});</script>
 
     <!-- Just for debugging purposes. Don\'t actually copy this line! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -180,8 +184,7 @@ echo '
                     </article>
                 </div>
             </section>
-          
-		  
+  
         </div>
         <div class=" page-content inset" Style="margin-left:300px;margin-right:50px;margin-top:50px;">
           <h1 class="page-header">Liste des Bibliotéques :</h1>
@@ -189,35 +192,124 @@ echo '
 
 
 <div Style="float:right;">
-<a href="ajouter_bibliotheque.php" type="button" class="btn btn-primary">Nouvelle Bibliotéque </a>
-     <a href="" type="button" class="btn btn-primary" onClick="window.print(); return false" id="noprint">Imprimer</a>
+<a data-toggle="modal" href="#myModal" class="btn btn-primary">Nouvelle bibliotheque</a>
+ <a href="" type="button" class="btn btn-primary" onClick="window.print(); return false" id="noprint">Imprimer</a>
 
 </div>
        
-<script>
-$(\'#largeModal\').on(\'hidden\', function() {
-    $(this).removeData(\'modal\');
-});
-</script>
 
+<div class="modal" id="myModal">
+	<div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h4 class="modal-title">Ajouter Bibliotheque :</h4>
+        </div><div class="container"></div>
+        <div class="modal-body">
+         <form method="POST" action="traitement_Ajout.php">
+		<table class="table">
+		
+		<tr>
+		<td>Nom :</td>
+		<td><input type ="text" name="nom"></td>
+		</tr>
+        <tr>
+        <td>مكتبة :</td>
+        <td><input type ="text" name="nom_arabe" class="keyboardInput" lang="ar"></td>
+        </tr>
+		<tr>
+		<td>Etat Juridique :</td>
+		<td><select name="etat_juri"> ';
+		
+		
+		include("../../connexion/connexion1.php");
+					$req="SELECT * FROM  etat_juridique ";
+					$res = mysql_query($req);
+					while($line=mysql_fetch_array($res)){
+					echo'<option value="'.$line['Etat'].'">'.$line['Etat'].'</option>';}
+		
+		
+		
+		echo' <td><a data-toggle="modal" data-target="#myModal2"><span class="glyphicon glyphicon-plus"/></a></td>
+		<tr>
+		<td> Tel: </td>
+		<td><input type ="text" name="tel"></td>
+		</tr>
+		<tr>
+		<td>Faxe :</td>
+		<td><input type ="text" name="Faxe"></td>
+		</tr>
+		<tr>
+		<td>Email :  </td>
+		<td><input type ="text" name="Email"></td>
+		</tr>
+		
+		<tr>
+		<td>Code Responsable: </td>
+		<td><select name="code_responsable">';
+		
+		 include("../../connexion/connexion1.php");
+					$req="SELECT * FROM  responsable ";
+					$res = mysql_query($req);
+					while($line=mysql_fetch_array($res)){
+					echo'<option value="'.$line[0].'">'.$line['Nom_resp'].'</option>';}
+		echo '</td>
+		</tr>
+		<tr>
+		<td>Code Province: </td>
+		<td><select name="code_province">';
+		
+					include('../../connexion/connexion1.php');
+                	$req2="SELECT * FROM province ";
 
-    <div class="modal fade" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="myModalLabel">Large Modal</h4>
-          </div>
-          <div class="modal-body">
-            <h3>Modal Body</h3>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
+                	$res2 = mysql_query($req2);
+					while($line=mysql_fetch_array($res2)){
+					echo'<option value="'.$line[0].'">'.$line['Nom_Province'].'</option>';}
+		echo '</td>
+		</tr>
+		
+		
+		</table>
+		</form>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          
+        </div>
+        <div class="modal-footer">
+         
+		 <input class="btn btn-primary " type ="submit" value="Ajouter" name="ajouter">
+          <a href="#" class="btn btn-primary" data-dismiss="modal">Annuler</a>
         </div>
       </div>
     </div>
+</div>
+<div class="modal" id="myModal2" data-backdrop="static">
+	<div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          
+<!--  ======================================etat juridique======================================================  -->
+		  
+		  <h4 class="modal-title">Ajouter un Etat Juridique :</h4>
+        </div><div class="container"></div>
+        <div class="modal-body">
+		<form method="POST" action="Etat/ajouter_etat.php">
+          <p>Nouveau Etat-juridique : </p><input type="text" name="etat">
+        </div>
+        <div class="modal-footer">
+          <a href="#" data-dismiss="modal" class="btn">Fermer</a>
+         <input class="btn btn-primary btn-lg" type ="submit" value="Ajouter" name="ajouter">
+		 
+		  </form>
+        </div>
+      </div>
+    </div>
+</div>
+
 
 
 
